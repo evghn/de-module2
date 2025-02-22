@@ -25,7 +25,7 @@ switch ($model->status_id) {
 
 ?>
 <div class="card">
-  <div class="card-header">
+  <div class="card-header <?= $order_style ?>">
     <h4>Заявка № <?= $model->id ?> от <?= Yii::$app->formatter->asDatetime($model->created_at, 'php:d.m.Y H:i:s') ?></h4>
   </div>
   <div class="card-body">
