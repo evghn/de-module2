@@ -93,7 +93,7 @@ class User extends ActiveRecord implements IdentityInterface
     {   
         return Yii::$app->security->validatePassword($password, $this->password);
     }
-    
+
 
     public static function findIdentity($id)
     {
@@ -134,5 +134,12 @@ class User extends ActiveRecord implements IdentityInterface
     public function validateAuthKey($authKey)
     {
         return $this->getAuthKey() === $authKey;
+    }
+
+
+    public function getIsAdmin()
+    {
+        // название роли взять из таблицы бд
+        return $this->role_id === Role::getRoleId('admin');
     }
 }

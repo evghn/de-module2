@@ -78,7 +78,11 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            Yii::$app->session->setFlash('success', 'Вы успешно вошли в систему!');
+            return Yii::$app->user->identity->isAdmin
+                ? $this->redirect('/admin')
+                : $this->redirect('/account')                
+                ;
         }
 
         $model->password = '';
@@ -110,7 +114,8 @@ class SiteController extends Controller
                 $user->password = Yii::$app->security->generatePasswordHash($user->password);
                 if ($user->save()) {
                     Yii::$app->session->setFlash('success', 'Пользователь зарегистрирован!');
-                    return $this->redirect('/');
+                    Yii::$app->user->login($user);
+                    return $this->redirect('/account');
                 }
 
             } else {
