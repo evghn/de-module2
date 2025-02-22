@@ -9,6 +9,8 @@
     animation: main 1.5s ease 1;
 }
 
+
+/* стили статусов заявок */
 .order-new {
     background-color: rgb(201, 220, 253);
 }
@@ -29,6 +31,7 @@
 
 
 
+/* анимация ошибочного заполнения поля на формах */
 
 @keyframes main {
     0% {

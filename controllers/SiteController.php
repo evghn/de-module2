@@ -105,6 +105,7 @@ class SiteController extends Controller
     }
 
     
+    // метод регистрации пользователя
     public function actionRegister()
     {
         $user = new \app\models\User();

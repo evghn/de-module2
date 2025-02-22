@@ -16,6 +16,8 @@ use yii\filters\VerbFilter;
 class AccountController extends Controller
 {
 
+
+    // метод ограничения входа пользователя по роли
     public function beforeAction($action)
     {
         if (!parent::beforeAction($action)) {
