@@ -17,7 +17,9 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="order-view">
 
     <h3><?= Html::encode($this->title) ?></h3>
-
+    <p>
+        <?= Html::a('Назад', ['index'], ['class' => 'btn btn-outline-info']) ?>
+    </p>
 
     <?= DetailView::widget([
         'model' => $model,
