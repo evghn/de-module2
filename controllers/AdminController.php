@@ -40,7 +40,7 @@ class AdminController extends Controller
             'query' => Order::find(),
             
             'pagination' => [
-                'pageSize' => 50
+                'pageSize' => 5
             ],
             'sort' => [
                 'defaultOrder' => [

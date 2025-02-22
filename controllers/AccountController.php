@@ -15,7 +15,7 @@ use yii\filters\VerbFilter;
  */
 class AccountController extends Controller
 {
-    
+
     public function beforeAction($action)
     {
         if (!parent::beforeAction($action)) {
@@ -40,7 +40,7 @@ class AccountController extends Controller
             'query' => Order::find(),
             
             'pagination' => [
-                'pageSize' => 50
+                'pageSize' => 5
             ],
             'sort' => [
                 'defaultOrder' => [
