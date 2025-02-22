@@ -9,6 +9,7 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\Role;
 
 class SiteController extends Controller
 {
@@ -98,31 +99,25 @@ class SiteController extends Controller
         return $this->goHome();
     }
 
-    /**
-     * Displays contact page.
-     *
-     * @return Response|string
-     */
-    public function actionContact()
+    
+    public function actionRegister()
     {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
+        $user = new \app\models\User();
+        if ($user->load(Yii::$app->request->post())) {
+            $user->role_id = Role::getRoleId('user');
+            $user->auth_key = Yii::$app->security->generateRandomString();
+            if ($user->validate()) {
+                $user->password = Yii::$app->security->generatePasswordHash($user->password);
+                if ($user->save()) {
+                    Yii::$app->session->setFlash('success', 'Пользователь зарегистрирован!');
+                    return $this->redirect('/');
+                }
 
-            return $this->refresh();
+            } else {
+                Yii::debug($user->errors);
+
+            }
         }
-        return $this->render('contact', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Displays about page.
-     *
-     * @return string
-     */
-    public function actionAbout()
-    {
-        return $this->render('about');
+        return $this->render('register', ['model' => $user,]);
     }
 }
