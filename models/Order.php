@@ -26,6 +26,8 @@ use Yii;
  */
 class Order extends \yii\db\ActiveRecord
 {
+
+    const SCENARIO_CANCEL = 'cancel';
     /**
      * {@inheritdoc}
      */
@@ -48,6 +50,7 @@ class Order extends \yii\db\ActiveRecord
             [['service_id'], 'exist', 'skipOnError' => true, 'targetClass' => Service::class, 'targetAttribute' => ['service_id' => 'id']],
             [['status_id'], 'exist', 'skipOnError' => true, 'targetClass' => Status::class, 'targetAttribute' => ['status_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
+            [['reason'], 'required', 'on' => self::SCENARIO_CANCEL],
         ];
     }
 
