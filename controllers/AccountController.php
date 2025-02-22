@@ -15,22 +15,18 @@ use yii\filters\VerbFilter;
  */
 class AccountController extends Controller
 {
-    /**
-     * @inheritDoc
-     */
-    public function behaviors()
+    
+    public function beforeAction($action)
     {
-        return array_merge(
-            parent::behaviors(),
-            [
-                'verbs' => [
-                    'class' => VerbFilter::className(),
-                    'actions' => [
-                        'delete' => ['POST'],
-                    ],
-                ],
-            ]
-        );
+        if (!parent::beforeAction($action)) {
+            return false;
+        }
+
+        if (Yii::$app->user->isGuest || Yii::$app->user->identity->isAdmin) {
+            return $this->redirect('/');
+        }
+
+        return true; // or false to not run the action
     }
 
     /**
