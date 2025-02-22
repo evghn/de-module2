@@ -57,17 +57,17 @@ class Order extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'address' => 'Address',
-            'contact' => 'Contact',
-            'created_at' => 'Created At',
-            'date' => 'Date',
-            'time' => 'Time',
-            'service_id' => 'Service ID',
-            'pay_type_id' => 'Pay Type ID',
-            'status_id' => 'Status ID',
-            'user_id' => 'User ID',
-            'reason' => 'Reason',
+            'id' => '№ заявки',
+            'address' => 'Адрес',
+            'contact' => 'Контактные данные',
+            'created_at' => 'Дата, время создания заявки',
+            'date' => 'Дата получения услуги',
+            'time' => 'Время получения услуги',
+            'service_id' => 'Вид услуги',
+            'pay_type_id' => 'Тип оплаты',
+            'status_id' => 'Статус заявки',
+            'user_id' => 'Пользователь',
+            'reason' => 'Причина отмены',
         ];
     }
 

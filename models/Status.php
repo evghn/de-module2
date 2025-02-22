@@ -53,4 +53,21 @@ class Status extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Order::class, ['status_id' => 'id']);
     }
+
+
+    public static function getStatusId($status)
+    {
+        return self::findOne(['title' => $status])->id;
+    }
+    
+    
+    public static function getStatuses()
+    {
+        return self::find()
+            ->select('title')
+            ->indexBy('id')
+            ->column()
+            ;
+    }
+
 }
