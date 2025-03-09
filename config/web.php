@@ -54,6 +54,20 @@ $config = [
         ],
         
     ],
+
+    'modules' => [
+        'help' => [
+            'class' => 'app\modules\help\Module',
+            'defaultRoute' => 'search'
+        ],
+
+        'shop' => [
+            'class' => 'app\modules\shop\Module',
+            'defaultRoute' => 'catalog'
+        ],
+        
+    ],
+
     'params' => $params,
 ];
 
