@@ -13,6 +13,7 @@ use Yii;
  * @property int $amount
  * @property float $cost
  * @property int $status_id
+ * @property int $pay_receipt
  *
  * @property OrderShopItem[] $orderShopItems
  * @property Status $status
@@ -35,7 +36,7 @@ class OrderShop extends \yii\db\ActiveRecord
     {
         return [
             [['user_id', 'status_id'], 'required'],
-            [['user_id', 'amount', 'status_id'], 'integer'],
+            [['user_id', 'amount', 'status_id', 'pay_receipt'], 'integer'],
             [['created_at'], 'safe'],
             [['cost'], 'number'],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
@@ -55,6 +56,7 @@ class OrderShop extends \yii\db\ActiveRecord
             'amount' => 'Amount',
             'cost' => 'Cost',
             'status_id' => 'Status ID',
+            'pay_receipt' => 'Оплата при получении',
         ];
     }
 
