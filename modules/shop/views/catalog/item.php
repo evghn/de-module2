@@ -26,7 +26,9 @@ use yii\bootstrap5\Html;
     </div>
     
     <div>
-    <?= Html::a('В корзину', ['cart/add', 'id' => $model->id], ['class' => 'btn btn-outline-success w-100']) ?>
+    <?= (!Yii::$app->user->isGuest && !Yii::$app->user->identity?->isAdmin)
+    ? Html::a('В корзину', ['cart/add', 'id' => $model->id], ['class' => 'btn btn-outline-success w-100 btn-add-cart']) 
+    : ""?>
     </div>
 
   </div>

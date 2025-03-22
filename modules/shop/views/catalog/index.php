@@ -18,7 +18,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <h3><?= Html::encode($this->title) ?></h3>
 
     
-    <?php Pjax::begin(); ?>
+    <?php Pjax::begin([
+        'id' => 'catalog-pjax'
+    ]); ?>
 
     
     <?= ListView::widget([

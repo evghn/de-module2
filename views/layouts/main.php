@@ -9,6 +9,8 @@ use yii\bootstrap5\Breadcrumbs;
 use yii\bootstrap5\Html;
 use yii\bootstrap5\Nav;
 use yii\bootstrap5\NavBar;
+use yii\web\JqueryAsset;
+use yii\widgets\Pjax;
 
 AppAsset::register($this);
 
@@ -68,6 +70,16 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                     . '</li>'
         ]
     ]);
+?>
+        
+        <?php if (!Yii::$app->user->isGuest && !Yii::$app->user->identity->isAdmin): ?>
+            <?= Html::a("<div class=\"d-flex\">🛒<div id='cart-item-count' class=\"text-white\"></div></div>",
+                ['/shop/cart'],
+                ['class' => 'text-decoration-none']) ?>
+        <?php    
+            $this->registerJsFile('/js/cart.js', ['depends' => JqueryAsset::class]);
+        endif;
+
     NavBar::end();
     ?>
 </header>
