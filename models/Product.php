@@ -20,6 +20,9 @@ use Yii;
 class Product extends \yii\db\ActiveRecord
 {
 
+    const SCENARIO_CREATE = 'create';
+    const SCENARIO_UPADATE = 'create';
+
     public $imageFile;
 
     /**
@@ -41,7 +44,8 @@ class Product extends \yii\db\ActiveRecord
             [['amount'], 'integer'],
             [['cost'], 'number'],
             [['title', 'photo'], 'string', 'max' => 255],
-            [['imageFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg']
+            [['imageFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg', 'on' => self::SCENARIO_CREATE],
+            // [['imageFile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg', 'on' => self::SCENARIO_UPADATE],
         ];
     }
 

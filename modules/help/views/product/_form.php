@@ -1,5 +1,7 @@
 <?php
 
+use mihaildev\ckeditor\CKEditor;
+use mihaildev\elfinder\ElFinder;
 use yii\bootstrap5\Html;
 use yii\bootstrap5\ActiveForm;
 
@@ -13,8 +15,20 @@ use yii\bootstrap5\ActiveForm;
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'composition')->widget(CKEditor::class, [
+        'editorOptions' => ElFinder::ckeditorOptions([
+            'elfinder',
+            [
+                'preset' => 'full', //разработанны стандартные настройки basic, standard, full данную возможность не обязательно использовать
+                'inline' => false, //по умолчанию false
+            ],
+        ])
+    ]) ?>
 
-    <?= $form->field($model, 'composition')->textarea(['rows' => 3]) ?>
+
+   
+    <? # $form->field($model, 'composition')->textarea(['rows' => 3]) 
+    ?>
 
     <?= $form->field($model, 'amount')->textInput() ?>
 

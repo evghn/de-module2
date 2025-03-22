@@ -68,7 +68,7 @@ class ProductController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Product();
+        $model = new Product(['scenario' => Product::SCENARIO_CREATE]);
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post())) {
@@ -97,9 +97,23 @@ class ProductController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        // $model->scenario = Product::SCENARIO_UPADATE;
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post())) {
+                $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+                if ($model->imageFile) {
+                    if ($model->upload()) {
+                        $model->save(false);
+                        return $this->redirect(['view', 'id' => $model->id]);
+                    }
+                } else {
+                    if ($model->validate()) {
+                        $model->save(false);
+                        return $this->redirect(['view', 'id' => $model->id]);
+                    }
+                }
+            }
         }
 
         return $this->render('update', [
