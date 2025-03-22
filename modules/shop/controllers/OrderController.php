@@ -95,8 +95,8 @@ class OrderController extends Controller
                     $shopItem->save();
                 }
 
-
-
+                $cart->delete();
+                
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
